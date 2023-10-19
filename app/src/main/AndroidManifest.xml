@@ -16,6 +16,9 @@
                 android:name=".NumberReceiver"
                 android:enabled="true"
                 android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.NUMBER_RECEIVER_ACTION" />
+            </intent-filter>
         </receiver>
 
         <service
@@ -25,7 +28,7 @@
         </service>
 
         <activity
-                android:name=".UserActivity"
+                android:name=".MainActivity"
                 android:exported="true"
                 android:label="@string/app_name"
                 android:theme="@style/Theme.Lab01">
@@ -36,14 +39,17 @@
             </intent-filter>
         </activity>
         <activity
-                android:name=".HelloActivity"
+                android:name=".UserActivity"
                 android:exported="true"
                 android:label="@string/app_name"
                 android:theme="@style/Theme.Lab01">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.USER_NAME_EXTRA"/>
+                <category android:name="android.intent.category.NUMBER_RECEIVER_ACTION"/>
             </intent-filter>
         </activity>
     </application>
