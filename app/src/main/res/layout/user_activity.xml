@@ -22,5 +22,9 @@
                 android:text="Stop"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" android:id="@+id/stop_btn" android:layout_weight="1"/>
+        <Button
+                android:text="Read"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/read_btn" android:layout_weight="1"/>
     </LinearLayout>
 </LinearLayout>

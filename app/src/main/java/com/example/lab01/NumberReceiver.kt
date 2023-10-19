@@ -4,6 +4,11 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.util.Log
+import androidx.room.Room
+import androidx.room.Room.databaseBuilder
+import com.example.lab01.DAO.AppDatabase
+import com.example.lab01.DAO.User
+
 
 class NumberReceiver : BroadcastReceiver() {
     val NUMBER_EXTRA = "NUMBER_EXTRA"
@@ -15,6 +20,7 @@ class NumberReceiver : BroadcastReceiver() {
 
         Log.d("Received user name: ", user!!)
         Log.d("Received number: ", "" + number)
+
 
     }
 }

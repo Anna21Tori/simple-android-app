@@ -5,6 +5,9 @@ import android.app.Service
 import android.content.Intent
 import android.os.IBinder
 import android.util.Log
+import androidx.room.Room
+import com.example.lab01.DAO.AppDatabase
+import com.example.lab01.DAO.User
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -20,16 +23,12 @@ class SimpleService : Service() {
     private var number = 0
     private var name = ""
 
+
     override fun onBind(intent: Intent?): IBinder? {
         return null
     }
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-          this.name = intent?.getStringExtra(USER_NAME_EXTRA).toString()
-//        val newInte nt = Intent(NumberReceiver.NUMBER_RECEIVER_ACTION)
-//        newIntent.putExtra(NumberReceiver.NUMBER_EXTRA, number)
-//        newIntent.putExtra(NumberReceiver.USER_NAME_EXTRA, intent!!.getStringExtra(HelloActivity.USER_NAME_EXTRA))
-//        sendBroadcast(newIntent)
-
+        this.name = intent?.getStringExtra(USER_NAME_EXTRA).toString()
         performTask()
         return START_STICKY
     }
@@ -39,15 +38,25 @@ class SimpleService : Service() {
 
         this.sendMessage()
         this.isDestroyed = true
+       // this.db.close()
     }
 
     private fun performTask(){
         val that = this;
+        val db = AppDatabase.getInstance(this)
         GlobalScope.launch {
             that.number = 0
             while (!isDestroyed) {
                 that.number++
                 Log.d("TAG","New number ${that.number}")
+
+
+                val user = User()
+                user.userName = that.name
+                user.number = that.number
+
+                db?.userDao()?.insert(user)
+
                 delay(1000)
             }
         }

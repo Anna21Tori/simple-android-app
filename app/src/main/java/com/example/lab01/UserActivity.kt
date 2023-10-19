@@ -3,9 +3,12 @@ package com.example.lab01
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import androidx.activity.ComponentActivity
+import androidx.room.Room
+import com.example.lab01.DAO.AppDatabase
 
 class UserActivity : ComponentActivity() {
 
@@ -14,6 +17,11 @@ class UserActivity : ComponentActivity() {
     private val numberReceiver = NumberReceiver()
     private val filter = IntentFilter(NUMBER_RECEIVER_ACTION)
     private var name = ""
+
+//    private val db = Room.databaseBuilder(
+//        applicationContext,
+//        AppDatabase::class.java, "users.db"
+//    ).build()
     public override fun onResume() {
         super.onResume()
         registerReceiver(numberReceiver, filter)
@@ -28,6 +36,8 @@ class UserActivity : ComponentActivity() {
 
         val start = findViewById<Button>(R.id.start_btn)
         val stop = findViewById<Button>(R.id.stop_btn)
+        val read = findViewById<Button>(R.id.read_btn)
+        val db = AppDatabase.getInstance(this)
 
         this.name = intent.getStringExtra("text").toString()
         val textView = findViewById<TextView>(R.id.textView)
@@ -42,6 +52,10 @@ class UserActivity : ComponentActivity() {
             this.onStopServiceBtnClick()
         }
 
+        read.setOnClickListener {
+            val counter = db?.userDao()?.getAll()?.size
+            Log.d("Couter db", counter.toString())
+        }
     }
 
     private fun onStartServiceBtnClick() {

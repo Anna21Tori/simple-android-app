@@ -6,13 +6,15 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import androidx.activity.ComponentActivity
+import androidx.room.Room
+import com.example.lab01.DAO.AppDatabase
 
 
 class MainActivity : ComponentActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.main_activity)
+
 
         val btn = findViewById<Button>(R.id.button)
         val editor = findViewById<EditText>(R.id.textEditor)
