@@ -54,7 +54,7 @@ class UserActivity : ComponentActivity() {
 
         read.setOnClickListener {
             val counter = db?.userDao()?.getAll()?.size
-            Log.d("Couter db", counter.toString())
+            Log.d("Counter db", counter.toString())
         }
     }
 
